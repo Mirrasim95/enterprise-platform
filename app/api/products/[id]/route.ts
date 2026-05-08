@@ -27,3 +27,20 @@ export async function PUT(
   Object.assign(product, body);
   return NextResponse.json(product);
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+  const product = products.find((p) => p.id === id);
+
+  if (!product) {
+    return NextResponse.json("Not found", { status: 404 });
+  }
+  const newProducs = products.filter((p) => p.id !== product.id);
+  products.length = 0;
+  products.push(...newProducs);
+
+  return NextResponse.json(products);
+}
