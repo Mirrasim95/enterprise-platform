@@ -16,5 +16,5 @@ export let orders = [
 ];
 
 export let users = [
-  { id: "u1", email: "admin@shop.com", password: "hashed", role: "admin" },
+  { id: "1", email: "admin@shop.com", password: "hashed", role: "admin" },
 ];
