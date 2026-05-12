@@ -1,4 +1,4 @@
-import { products } from "@/lib/data";
+import { orders } from "@/lib/data";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -6,46 +6,45 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const product = products.find((p) => p.id === id);
+  const order = orders.find((order) => order.id === id);
 
-  if (!product) {
-    return NextResponse.json("Not Found", { status: 404 });
+  if (!order) {
+    return NextResponse.json("Not found", { status: 404 });
   }
-  return NextResponse.json(product);
-}
 
+  return NextResponse.json(order);
+}
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const product = products.find((p) => p.id === id);
-  if (!product) {
+  const order = orders.find((order) => order.id === id);
+  if (!order) {
     return NextResponse.json("Not found", { status: 404 });
   }
   try {
     const body = await request.json();
-    Object.assign(product, body);
+    Object.assign(order, body);
   } catch {
     return NextResponse.json({ message: "Invalid JSON" }, { status: 400 });
   }
 
-  return NextResponse.json(product);
+  return NextResponse.json(order);
 }
-
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-  const product = products.find((p) => p.id === id);
+  const order = orders.find((order) => order.id === id);
 
-  if (!product) {
+  if (!order) {
     return NextResponse.json("Not found", { status: 404 });
   }
-  const newProducs = products.filter((p) => p.id !== product.id);
-  products.length = 0;
-  products.push(...newProducs);
+  const newOrders = orders.filter((o) => o.id !== order.id);
+  orders.length = 0;
+  orders.push(...newOrders);
 
-  return NextResponse.json(products);
+  return NextResponse.json(orders);
 }
