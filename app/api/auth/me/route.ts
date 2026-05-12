@@ -19,5 +19,6 @@ export async function GET(request: Request) {
   }
 
   const { password, ...userWithoutPassword } = user;
+
   return NextResponse.json(userWithoutPassword);
 }
