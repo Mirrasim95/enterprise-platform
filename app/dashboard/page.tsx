@@ -1,5 +1,6 @@
 "use client";
 
+import { Order, Product } from "@/lib/data";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Page() {
@@ -23,12 +24,12 @@ export default function Page() {
   return (
     <div>
       <div>
-        {data?.map((item) => (
+        {data?.map((item: Product) => (
           <div key={item.id}>{item.name}</div>
         ))}
       </div>
       <div>
-        {orders?.map((item) => (
+        {orders?.map((item: Order) => (
           <div key={item.id}>
             <p>Product Id - {item.productId}</p>
             <p>Quantity is {item.quantity}</p>
