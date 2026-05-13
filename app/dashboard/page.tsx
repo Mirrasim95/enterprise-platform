@@ -1,5 +1,6 @@
 "use client";
 
+import ProductForm from "@/components/ProductForm";
 import { Order, Product } from "@/lib/data";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,11 +8,13 @@ export default function Page() {
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: () => fetch("/api/products").then((res) => res.json()),
+    refetchInterval: 1000,
   });
 
   const { data: orders, isLoading: ordersLoading } = useQuery({
     queryKey: ["orders"],
     queryFn: () => fetch("/api/orders").then((res) => res.json()),
+    refetchInterval: 1000,
   });
 
   if (isLoading) {
@@ -37,6 +40,7 @@ export default function Page() {
           </div>
         ))}
       </div>
+      <ProductForm />
     </div>
   );
 }

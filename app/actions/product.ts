@@ -20,7 +20,8 @@ export async function createProduct(formData: FormData) {
   const result = Product.safeParse({ name, price, stock, category });
 
   if (!result.success) {
-    return { error: result.error.issues };
+    console.log(result.error.issues);
+    return;
   }
 
   const newProduct = {
