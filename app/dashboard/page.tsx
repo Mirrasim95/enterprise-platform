@@ -1,10 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import ProductForm from "@/components/ProductForm";
 import { Order, Product } from "@/lib/data";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/lib/contexts/AuthContext";
 
 export default function Page() {
+  const auth = useAuth();
+  const router = useRouter();
+
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: () => fetch("/api/products").then((res) => res.json()),
@@ -16,6 +21,11 @@ export default function Page() {
     queryFn: () => fetch("/api/orders").then((res) => res.json()),
     refetchInterval: 1000,
   });
+
+  if (!auth?.token) {
+    router.push("/login");
+    return null;
+  }
 
   if (isLoading) {
     return <div>...Loading</div>;

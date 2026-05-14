@@ -20,7 +20,7 @@ export default function Page() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex justify-center align-center">
       <input name="email" type="text" placeholder="Enter email.." />
       <input name="password" type="text" placeholder="Enter password.." />
       <button>Login</button>
