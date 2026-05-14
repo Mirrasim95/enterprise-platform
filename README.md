@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Enterprise E-commerce Platform
+
+A Shopify-style e-commerce backend integration platform built with Next.js App Router, TypeScript, and TanStack Query.
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- TypeScript
+- TanStack Query
+- JWT Authentication
+- Zod Validation
+- bcryptjs
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Products
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- GET /api/products
+- POST /api/products
+- GET /api/products/[id]
+- PUT /api/products/[id]
+- DELETE /api/products/[id]
 
-## Learn More
+### Orders
 
-To learn more about Next.js, take a look at the following resources:
+- GET /api/orders
+- POST /api/orders
+- GET /api/orders/[id]
+- PUT /api/orders/[id]
+- DELETE /api/orders/[id]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Auth
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/me
+- POST /api/auth/logout
 
-## Deploy on Vercel
+## Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- JWT Authentication with protected routes
+- CRUD operations for products and orders
+- Server Actions with Zod validation
+- TanStack Query for data fetching
+- AuthContext for global auth state
