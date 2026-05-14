@@ -35,22 +35,33 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <div>
-        {data?.map((item: Product) => (
-          <div key={item.id}>{item.name}</div>
-        ))}
+    <div className="min-h-screen bg-gray-50 p-8 text-gray-800">
+      <div className="flex justify-around items-center">
+        <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
+        <ProductForm />
       </div>
-      <div>
-        {orders?.map((item: Order) => (
-          <div key={item.id}>
-            <p>Product Id - {item.productId}</p>
-            <p>Quantity is {item.quantity}</p>
-            <p>Status is {item.status}</p>
+
+      <h2 className="text-xl font-semibold mb-4">Products</h2>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {data?.map((item: Product) => (
+          <div key={item.id} className="bg-white p-4 rounded-lg shadow">
+            <p className="font-bold">{item.name}</p>
+            <p className="text-gray-500">${item.price}</p>
+            <p className="text-sm text-gray-400">{item.category}</p>
           </div>
         ))}
       </div>
-      <ProductForm />
+
+      <h2 className="text-xl font-semibold mb-4">Orders</h2>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {orders?.map((item: Order) => (
+          <div key={item.id} className="bg-white p-4 rounded-lg shadow">
+            <p className="font-bold">Order #{item.id}</p>
+            <p className="text-gray-500">Quantity: {item.quantity}</p>
+            <p className="text-sm text-blue-500">{item.status}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

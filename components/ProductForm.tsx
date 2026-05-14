@@ -11,12 +11,36 @@ export default function ProductForm() {
   }
 
   return (
-    <form action={handleSubmit}>
-      <input name="name" placeholder="Name" />
-      <input name="price" placeholder="Price" />
-      <input name="stock" placeholder="Stock" />
-      <input name="category" placeholder="Category" />
-      <button type="submit">Add Product</button>
+    <form
+      action={handleSubmit}
+      className="border border-gray-300 rounded-2xl p-5 flex items-center"
+    >
+      <input
+        name="name"
+        placeholder="Name"
+        className="border rounded-lg px-3 py-2 mr-2 border-gray-300"
+      />
+      <input
+        name="price"
+        placeholder="Price"
+        className="border rounded-lg px-3 py-2 mr-2 border-gray-300"
+      />
+      <input
+        name="stock"
+        placeholder="Stock"
+        className="border rounded-lg px-3 py-2 mr-2 border-gray-300"
+      />
+      <input
+        name="category"
+        placeholder="Category"
+        className="border rounded-lg px-3 py-2 mr-2 border-gray-300"
+      />
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg ml-2"
+      >
+        Add Product
+      </button>
     </form>
   );
 }
