@@ -16,7 +16,11 @@ export async function POST(request: Request) {
     return NextResponse.json("User not found", { status: 404 });
   }
 
-  const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: "7d" });
+  const token = jwt.sign(
+    { userId: user.id },
+    process.env.JWT_SECRET ?? "secret",
+    { expiresIn: "7d" },
+  );
 
   return NextResponse.json({ token });
 }

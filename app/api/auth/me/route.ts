@@ -10,7 +10,9 @@ export async function GET(request: Request) {
     return NextResponse.json("Unauthorized", { status: 401 });
   }
 
-  const decoded = jwt.verify(token, "secret") as { userId: string };
+  const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "secret") as {
+    userId: string;
+  };
   const userId = decoded.userId;
   const user = users.find((user) => user.id === userId);
 
