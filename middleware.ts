@@ -5,7 +5,7 @@ import { jwtVerify } from "jose";
 export async function middleware(request: NextRequest) {
   const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? "secret");
 
-  const token = request.headers.get("authorization")?.split(" ")[1];
+  const token = request.cookies.get("token")?.value;
 
   if (!token) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

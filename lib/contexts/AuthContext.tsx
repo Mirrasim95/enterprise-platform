@@ -4,40 +4,34 @@ import { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
   user: any;
-  token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
 
   async function login(email: string, password: string) {
-    const res = await fetch("/api/auth/login", {
+    await fetch("/api/auth/login", {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const data = await res.json();
-    setToken(data.token);
 
-    const res_user = await fetch("/api/auth/me", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${data.token}` },
-    });
+    const res_user = await fetch("/api/auth/me");
     const data_user = await res_user.json();
     setUser(data_user);
   }
-  function logout() {
+
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
-    setToken(null);
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

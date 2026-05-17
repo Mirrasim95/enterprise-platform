@@ -22,5 +22,11 @@ export async function POST(request: Request) {
     { expiresIn: "7d" },
   );
 
-  return NextResponse.json({ token });
+  const response = NextResponse.json({ success: true });
+  response.cookies.set("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 24 * 7, // 7 дней
+  });
+  return response;
 }
