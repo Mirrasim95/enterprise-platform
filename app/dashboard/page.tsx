@@ -22,7 +22,7 @@ export default function Page() {
     refetchInterval: 1000,
   });
 
-  if (!auth?.token) {
+  if (!auth?.user) {
     router.push("/login");
     return null;
   }
